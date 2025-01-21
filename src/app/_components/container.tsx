@@ -11,35 +11,20 @@ import Image from "next/image";
 import { useConfig } from "@/store/config";
 
 export default function Container() {
-  const xCoinUrl = useConfig()((state) => state.config.x_coin_url);
-  const buyUrl = useConfig()((state) => state.config.buy_url);
+  // const xCoinUrl = useConfig()((state) => state.config.x_coin_url);
+  // const buyUrl = useConfig()((state) => state.config.buy_url);
 
-  console.info(xCoinUrl);
-  console.info(buyUrl);
+  // console.info(xCoinUrl);
+  // console.info(buyUrl);
 
   return (
-    <main className="relative h-full w-full">
-      <Header />
-      <Section1 />
-      <RunningText
-        marqueProps={{ direction: "right" }}
-        image={
-          <Image
-            src={"https://picsum.photos/40"}
-            width={40}
-            height={40}
-            alt=""
-          />
-        }
-        coinName="$COIN"
-        count={100}
-      />
-      <Section2 />
-      <RunningText coinName="$COIN" count={100} />
-      <Section3 />
-      <RunningText coinName="$COIN" count={100} />
-      <Section4 />
-      <Footer />
+    <main className="relative h-screen w-full bg-[url('/assets/homepage/bg.jpeg')] bg-cover bg-bottom bg-no-repeat">
+      <div className="h-full w-full bg-[url('/assets/homepage/overlay.png')] bg-bottom bg-cover bg-no-repeat relative">
+        <Section1 />
+        <div className="absolute bottom-0 w-full">
+          <Footer />
+        </div>
+      </div>
     </main>
   );
 }

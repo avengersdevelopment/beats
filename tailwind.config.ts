@@ -15,7 +15,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        dm: ["var(--font-dm)"],
+        joystix: ["var(--font-joystix)"],
+        poppins: ["var(--font-poppins)"],
       },
       container: {
         center: true,
@@ -34,6 +35,10 @@ const config: Config = {
           "50%": { transform: "translate(4px, -4px)" },
         },
       },
+      dropShadow: {
+        purple: '0 5px #C2A2FF',
+        darker: '0 5px #402F5C'
+      }
     },
   },
   plugins: [],
