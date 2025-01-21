@@ -1,3 +1,5 @@
+"use client";
+
 import Header from "@/app/_components/header";
 import { Section1 } from "@/app/_components/section-1";
 import { Section2 } from "@/app/_components/section-2";
@@ -6,19 +8,17 @@ import { Section4 } from "@/app/_components/section-4";
 import Footer from "@/app/_components/footer";
 import RunningText from "@/app/_components/running-text";
 import Image from "next/image";
+import { useConfig } from "@/store/config";
 
-interface ContainerProps {
-  config: {
-    x_url: string;
-    x_dev_url: string;
-    buy_url: string;
-    docs: string;
-  };
-}
+export default function Container() {
+  const xCoinUrl = useConfig()((state) => state.config.x_coin_url);
+  const buyUrl = useConfig()((state) => state.config.buy_url);
 
-export default function Container({ config }: ContainerProps) {
+  console.info(xCoinUrl);
+  console.info(buyUrl);
+
   return (
-    <main className="w-full h-full relative">
+    <main className="relative h-full w-full">
       <Header />
       <Section1 />
       <RunningText
