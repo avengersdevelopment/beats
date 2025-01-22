@@ -52,7 +52,7 @@ export default async function RootLayout({
     <>
       <Aos />
       <html lang="en" className="relative">
-        <body className={twMerge(joystix.variable, poppins.variable, "font-joystix antialiased")}>
+        <body className={twMerge(poppins.variable, joystix.variable, "font-joystix antialiased")}>
           <Providers config={configs?.[0] || null}>{children}</Providers>
         </body>
       </html>

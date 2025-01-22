@@ -1,7 +1,6 @@
 export const Section1 = () => {
   return (
-    <section className="h-full w-full flex flex-col items-center justify-center">
-      {/* Content */}
+    <form className="h-full w-full flex flex-col items-center justify-center" onSubmit={() => {}}>
       <div className="text-center text-white -mt-16 mb-5">
         <h1 className="drop-shadow-purple text-7xl outline-text">BEATS</h1>
         <p className="drop-shadow-darker text-2xl mt-5 outline-text">
@@ -17,6 +16,6 @@ export const Section1 = () => {
         />
         <button type="submit"><img src="/assets/homepage/music-button.png" alt="submit" className="ml-4"/></button>
       </div>
-    </section>
+    </form>
   );
 };

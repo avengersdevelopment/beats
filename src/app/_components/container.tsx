@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useConfig } from "@/store/config";
 
 export default function Container() {
+  let result = true
   // const xCoinUrl = useConfig()((state) => state.config.x_coin_url);
   // const buyUrl = useConfig()((state) => state.config.buy_url);
 
@@ -20,7 +21,7 @@ export default function Container() {
   return (
     <main className="relative h-screen w-full bg-[url('/assets/homepage/bg.jpeg')] bg-cover bg-bottom bg-no-repeat">
       <div className="h-full w-full bg-[url('/assets/homepage/overlay.png')] bg-bottom bg-cover bg-no-repeat relative">
-        <Section1 />
+        {result ? <Section2 /> : <Section1 />}
         <div className="absolute bottom-0 w-full">
           <Footer />
         </div>
