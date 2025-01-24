@@ -1,6 +1,6 @@
-export const Section1 = () => {
+export const Section1 = ({onSubmit}: {onSubmit: () => void}) => {
   return (
-    <form className="h-full w-full flex flex-col items-center justify-center" onSubmit={() => {}}>
+    <form className="h-full w-full flex flex-col items-center justify-center" onSubmit={onSubmit}>
       <div className="text-center text-white -mt-16 mb-5">
         <h1 className="drop-shadow-purple text-7xl outline-text">BEATS</h1>
         <p className="drop-shadow-darker text-2xl mt-5 outline-text">
