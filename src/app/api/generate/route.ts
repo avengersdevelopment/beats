@@ -11,7 +11,7 @@ interface GenerateRequestBody {
   };
 }
 
-interface GenerateResponse {
+export interface GenerateResponse {
   id: string;
   prompt: string;
   output: string;

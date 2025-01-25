@@ -2,22 +2,9 @@ import Aos from "@/components/aos";
 import Providers from "@/components/providers";
 import { createClient } from "@/utils/supabase/server";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import localFont from "next/font/local"
 import { twMerge } from "tailwind-merge";
 import "./globals.css";
-
-// const dmSans = DM_Sans({
-//   weight: ["400", "700"],
-//   subsets: ["latin"],
-//   variable: "--font-dm",
-// });
-
-const poppins = Poppins({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-})
 
 const joystix = localFont({
   src: "../../public/fonts/joystix.otf",
@@ -52,7 +39,7 @@ export default async function RootLayout({
     <>
       <Aos />
       <html lang="en" className="relative">
-        <body className={twMerge(poppins.variable, joystix.variable, "font-joystix antialiased")}>
+        <body className={twMerge(joystix.variable, "font-joystix antialiased bg-[#36088D]")}>
           <Providers config={configs?.[0] || null}>{children}</Providers>
         </body>
       </html>

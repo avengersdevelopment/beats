@@ -16,7 +16,6 @@ const config: Config = {
     extend: {
       fontFamily: {
         joystix: ["var(--font-joystix)"],
-        poppins: ["var(--font-poppins)"],
       },
       container: {
         center: true,
