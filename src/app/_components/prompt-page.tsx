@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { GenerateResponse } from "../api/generate/route";
+import Slider from "./ui/slider";
+import Dropdown from "./ui/dropdown";
 
 interface PromptPageProps {
   onSubmit: () => void;
@@ -97,6 +99,14 @@ export default function PromptPage({
               onClick={handleSubmit}
             />
           )}
+        </div>
+        <div className="w-full flex flex-row mt-5 gap-5">
+          <div className="w-[60%] border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 p-[1vw] text-[1vw] text-white">
+            <Slider />
+          </div>
+          <div className="w-1/4">
+            <Dropdown />
+          </div>
         </div>
       </div>
     </section>

@@ -6,7 +6,7 @@ import PromptPage from "./prompt-page";
 import ResultPage from "./result-page";
 
 export default function Container() {
-  const [result, setResult] = useState<string | null>("asd");
+  const [result, setResult] = useState<string | null>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (

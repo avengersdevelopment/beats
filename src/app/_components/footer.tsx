@@ -33,8 +33,8 @@ export const Footer = () => {
   //   </>
   // );
 
-  const xCoinUrl = useConfig()((state) => state.config.x_coin_url);
-  const buyUrl = useConfig()((state) => state.config.buy_url);
+  const xCoinUrl = useConfig()((state) => state?.config?.x_coin_url);
+  const buyUrl = useConfig()((state) => state?.config?.buy_url);
 
   return (
     <div className="absolute bottom-0 left-0 right-0 flex h-[20vh] w-full justify-center bg-[url('/assets/home/footer.png')] bg-cover bg-top">
