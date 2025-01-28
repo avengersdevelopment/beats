@@ -12,10 +12,10 @@ const joystix = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "App Name",
+  title: "Beats",
   description: "App Description",
   openGraph: {
-    title: "App Name",
+    title: "Beats",
     description: "App Description",
     url: "/",
     images: [

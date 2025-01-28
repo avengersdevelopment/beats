@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { GenerateResponse } from "../api/generate/route";
-import Slider from "./ui/slider";
-import Dropdown from "./ui/dropdown";
+import { MusicResponse } from "../api/generate/route";
+import DropdownGenre from "./dropdown-genre";
+import SliderDuration from "./slider-duration";
+import { createClient } from "@/utils/supabase/client";
+import { useUserStore } from "@/store/user-store";
 
 interface PromptPageProps {
   onSubmit: () => void;
@@ -16,6 +18,9 @@ export default function PromptPage({
   isLoading,
   onSubmitted,
 }: PromptPageProps) {
+  const supabase = createClient();
+  const { userId } = useUserStore();
+
   const [prompt, setPrompt] = useState<string>("");
 
   const handleSubmit = async () => {
@@ -36,7 +41,17 @@ export default function PromptPage({
         throw new Error("Network response was not ok");
       }
 
-      const data: GenerateResponse = await response.json();
+      const responseData = await response.json();
+      const data: MusicResponse = {
+        user_id: userId || "",
+        item_id: responseData.id,
+        created_at: responseData.created_at,
+        prompt: responseData.input.prompt,
+        duration: responseData.input.duration,
+        output: responseData.output,
+      };
+
+      await supabase.from("library").insert(data);
       onSubmitted(data.output);
     } catch (error) {
       console.error("Error submitting prompt:", error);
@@ -100,14 +115,14 @@ export default function PromptPage({
             />
           )}
         </div>
-        <div className="w-full flex flex-row mt-5 gap-5">
-          <div className="w-[60%] border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 p-[1vw] text-[1vw] text-white">
-            <Slider />
+        {/* <div className="mt-5 flex w-full flex-row gap-5">
+          <div className="w-[60%] border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 p-[1vw]">
+            <SliderDuration />
           </div>
-          <div className="w-1/4">
-            <Dropdown />
+          <div className="">
+            <DropdownGenre />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

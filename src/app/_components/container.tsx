@@ -1,15 +1,23 @@
 "use client";
 
 import Footer from "@/app/_components/footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PromptPage from "./prompt-page";
 import ResultPage from "./result-page";
-import { useResultStore } from "@/store/result-store";
+import { useUserStore } from "@/store/user-store";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Container() {
-  const { result, setResult } = useResultStore();
+  const { result, userId, setResult, setUserId } = useUserStore();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!userId) {
+      const uuid = uuidv4();
+      setUserId(uuid);
+    }
+  }, [setUserId, userId]);
 
   return (
     <main className="h-screen w-full bg-[url('/assets/home/bg.webp')] bg-cover bg-center">

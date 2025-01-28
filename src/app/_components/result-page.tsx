@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { AudioPlayer } from "./audio-player";
+import { TwitterShareButton } from "react-share";
 
 interface ResultPageProps {
   musicUrl: string;
@@ -7,6 +8,23 @@ interface ResultPageProps {
 }
 
 export default function ResultPage({ musicUrl, onBack }: ResultPageProps) {
+  async function handleDownload() {
+    try {
+      const response = await fetch(musicUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `BEATS.mp3`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  }
+
   return (
     <section className="relative flex h-[80vh] w-full justify-center">
       <div className="flex h-full w-[55vw] flex-col items-center justify-center">
@@ -34,17 +52,18 @@ export default function ResultPage({ musicUrl, onBack }: ResultPageProps) {
             height={480}
             alt=""
             className="h-auto w-[14vw] cursor-pointer hover:animate-shake"
-            onClick={() => {}}
+            onClick={() => handleDownload()}
           />
 
-          <Image
-            src={"/assets/home/btn-share.png"}
-            width={480}
-            height={480}
-            alt=""
-            className="h-auto w-[12vw] cursor-pointer hover:animate-shake"
-            onClick={() => {}}
-          />
+          <TwitterShareButton url={"x.com"} title={"example title"}>
+            <Image
+              src={"/assets/home/btn-share.png"}
+              width={480}
+              height={480}
+              alt=""
+              className="h-auto w-[12vw] cursor-pointer hover:animate-shake"
+            />
+          </TwitterShareButton>
         </div>
       </div>
     </section>

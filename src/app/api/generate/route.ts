@@ -8,13 +8,17 @@ interface GenerateRequestBody {
     model_version: string;
     output_format: string;
     normalization_strategy: string;
+    duration: number;
   };
 }
 
-export interface GenerateResponse {
-  id: string;
+export interface MusicResponse {
+  item_id: string;
+  user_id: string;
+  created_at: string;
   prompt: string;
   output: string;
+  duration: number;
 }
 
 export async function POST(request: NextRequest) {
@@ -48,6 +52,7 @@ export async function POST(request: NextRequest) {
       model_version: modelVersion,
       output_format: outputFormat,
       normalization_strategy: normalizationStrategy,
+      duration: 12,
     },
   };
 
@@ -61,13 +66,7 @@ export async function POST(request: NextRequest) {
     });
 
     const responseData = response.data;
-    const mappedData: GenerateResponse = {
-      id: responseData.id,
-      prompt: responseData.input.prompt,
-      output: responseData.output,
-    };
-
-    return NextResponse.json(mappedData, { status: response.status });
+    return NextResponse.json(responseData, { status: response.status });
   } catch (e: any) {
     return NextResponse.json(
       { error: e.response.data },

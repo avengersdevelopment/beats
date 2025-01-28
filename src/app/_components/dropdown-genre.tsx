@@ -1,0 +1,69 @@
+import { useEffect, useState } from "react";
+
+const dropdownList = ["lofi", "hiphop"];
+
+function DropdownGenre() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (event.target.closest(".dropdown") !== document.activeElement) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      // Cleanup function to remove event listener on unmount
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  return (
+    <div className="relative inline-block h-full w-full text-left">
+      <button
+        onClick={toggleDropdown}
+        className="inline-flex h-full w-full items-center justify-center border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 text-sm font-medium text-white focus:outline-none focus:ring-0"
+      >
+        Genre
+        <svg
+          className="-mr-1 ml-2 h-5 w-5"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="dropdown absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          {/* List item options */}
+          <div className="py-1">
+            {dropdownList.map((data, index) => (
+              <button
+                key={index}
+                onClick={() => console.log(data)}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                {data}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default DropdownGenre;
