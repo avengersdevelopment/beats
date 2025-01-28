@@ -4,9 +4,11 @@ import Footer from "@/app/_components/footer";
 import { useState } from "react";
 import PromptPage from "./prompt-page";
 import ResultPage from "./result-page";
+import { useResultStore } from "@/store/result-store";
 
 export default function Container() {
-  const [result, setResult] = useState<string | null>("");
+  const { result, setResult } = useResultStore();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
@@ -23,7 +25,11 @@ export default function Container() {
           isLoading={isLoading}
         />
       ) : (
-        <ResultPage key={result} onBack={() => setResult(null)} musicUrl={result} />
+        <ResultPage
+          key={result}
+          onBack={() => setResult(null)}
+          musicUrl={result}
+        />
       )}
 
       <Footer />

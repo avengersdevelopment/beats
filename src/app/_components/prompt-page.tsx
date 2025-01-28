@@ -37,7 +37,7 @@ export default function PromptPage({
       }
 
       const data: GenerateResponse = await response.json();
-      onSubmitted(data.prompt);
+      onSubmitted(data.output);
     } catch (error) {
       console.error("Error submitting prompt:", error);
       onSubmitted(null);
