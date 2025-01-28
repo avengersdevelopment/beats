@@ -91,14 +91,14 @@ export const Footer = () => {
         <source src={musicUrl} type="audio/mpeg" />
       </audio>
       <div className="absolute bottom-0 left-0 right-0 flex h-[20vh] w-full justify-center bg-[url('/assets/home/footer.png')] bg-cover bg-top">
-        <div className="flex h-full w-[80vw] items-center justify-center gap-[2vw]">
+        <div className="flex h-full w-[90vw] items-center justify-center gap-[2vw] md:w-[80vw]">
           <Link href={buyUrl || ""} target="_blank">
             <Image
               src={"/assets/home/btn-dex.png"}
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[10vw] hover:animate-shake"
+              className="h-auto w-[15vw] hover:animate-shake md:w-[10vw]"
               priority
             />
           </Link>
@@ -109,7 +109,7 @@ export const Footer = () => {
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[7vw] hover:animate-shake"
+              className="h-auto w-[11vw] hover:animate-shake md:w-[7vw]"
               priority
             />
           </Link>
@@ -119,19 +119,19 @@ export const Footer = () => {
             width={480}
             height={480}
             alt=""
-            className="absolute -top-[25%] left-[40%] h-auto w-[24vw] cursor-pointer hover:animate-shake"
+            className="absolute -top-[10%] h-auto w-[40vw] cursor-pointer hover:animate-shake md:-top-[25%] md:left-[40%] md:w-[24vw]"
             priority
             onClick={() => setIsModalDemoOpen(true)}
           />
 
-          <div className="h-auto w-[20vw]" />
+          <div className="hidden h-auto md:block md:w-[20vw]" />
 
           <Image
             src={"/assets/home/btn-library.png"}
             width={480}
             height={480}
             alt=""
-            className="h-auto w-[16vw] cursor-pointer hover:animate-shake"
+            className="h-auto w-[25vw] cursor-pointer hover:animate-shake md:w-[16vw]"
             priority
             onClick={() => setIsModalOpen(true)}
           />
@@ -147,20 +147,20 @@ export const Footer = () => {
             className="absolute left-0 top-0 z-50 h-screen w-full bg-black/50"
           >
             <div className="flex h-full w-full items-center justify-center">
-              <div className="h-[70vh] w-[50vw]">
+              <div className="h-[30vh] w-[80vw] md:h-[70vh] md:w-[50vw]">
                 <motion.div
                   initial={{ y: 80 }}
                   animate={{ y: 0 }}
                   exit={{ y: 100 }}
                   className="relative flex h-full w-full flex-col border-[0.25vw] border-white"
                 >
-                  <div className="absolute -right-[1.5vw] -top-[1.5vw] z-50">
+                  <div className="absolute -right-[3vw] -top-[3.5vw] z-50 md:-right-[1.5vw] md:-top-[1.5vw]">
                     <Image
                       src={"/assets/home/btn-close.png"}
                       width={480}
                       height={480}
                       alt=""
-                      className="h-auto w-[2.5vw] cursor-pointer hover:animate-shake"
+                      className="h-auto w-[6vw] cursor-pointer hover:animate-shake md:w-[2.5vw]"
                       onClick={() => setIsModalOpen(false)}
                     />
                   </div>
@@ -170,11 +170,11 @@ export const Footer = () => {
                     width={480}
                     height={480}
                     alt=""
-                    className="absolute -left-[2.5vw] -top-[2.5vw] h-auto w-[5vw]"
+                    className="absolute -left-[4vw] -top-[4vw] h-auto w-[8vw] md:-left-[2.5vw] md:-top-[2.5vw] md:w-[5vw]"
                   />
 
-                  <div className="w-full border-b-[0.25vw] border-white bg-[#630FFF]">
-                    <p className="text-center text-[2vw] text-white">
+                  <div className="w-full border-b-[0.25vw] border-white bg-[#630FFF] p-2 md:p-[1vw]">
+                    <p className="text-center text-xs text-white md:text-[2vw]">
                       YOUR GENERATED MUSIC HISTORY
                     </p>
                   </div>
@@ -188,25 +188,25 @@ export const Footer = () => {
                           className="flex w-full gap-[2vw] border-b border-dashed p-[2vw]"
                         >
                           <div className="flex flex-col">
-                            <p className="w-[30vw] truncate bg-white text-[1.25vw] text-black">
+                            <p className="w-[30vw] truncate bg-white text-[8px] text-black md:text-[1.25vw]">
                               {item.prompt}
                             </p>
-                            <p className="text-[0.75vw] text-white">
+                            <p className="text-[5px] text-white md:text-[0.75vw]">
                               {`Generated on: ${date.toLocaleString()}`}
                             </p>
-                            <p className="text-[0.75vw] text-white">
+                            <p className="text-[5px] text-white md:text-[0.75vw]">
                               Duration: {item.duration}
                             </p>
                           </div>
 
-                          <div className="flex h-min gap-[1vw]">
+                          <div className="flex h-min w-[30%] gap-[1vw]">
                             {isPlaying && musicUrl === item.output ? (
                               <Image
                                 src={"/assets/home/btn-pause.png"}
                                 width={480}
                                 height={480}
                                 alt=""
-                                className="h-auto w-[4vw] cursor-pointer hover:animate-shake"
+                                className="h-auto w-[8vw] cursor-pointer hover:animate-shake md:w-[4vw]"
                                 onClick={() => {
                                   setIsPlaying(false);
                                   setMusicUrl("");
@@ -218,7 +218,7 @@ export const Footer = () => {
                                 width={480}
                                 height={480}
                                 alt=""
-                                className="h-auto w-[4vw] cursor-pointer hover:animate-shake"
+                                className="h-auto w-[8vw] cursor-pointer hover:animate-shake md:w-[4vw]"
                                 onClick={() => {
                                   setIsPlaying(true);
                                   setMusicUrl(item.output);
@@ -231,7 +231,7 @@ export const Footer = () => {
                               width={480}
                               height={480}
                               alt=""
-                              className="h-auto w-[4vw] cursor-pointer hover:animate-shake"
+                              className="h-auto w-[8vw] cursor-pointer hover:animate-shake md:w-[4vw]"
                               onClick={() => handleDownload(item)}
                             />
 
@@ -240,7 +240,7 @@ export const Footer = () => {
                               width={480}
                               height={480}
                               alt=""
-                              className="h-auto w-[4vw] cursor-pointer hover:animate-shake"
+                              className="h-auto w-[8vw] cursor-pointer hover:animate-shake md:w-[4vw]"
                               onClick={() => handleDelete(item.item_id)}
                             />
                           </div>
@@ -261,10 +261,10 @@ export const Footer = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute left-0 top-0 z-50 h-screen w-full bg-black/50"
+            className="absolute left-0 top-0 z-40 h-screen w-full bg-black/50"
           >
             <div className="flex h-full w-full items-center justify-center">
-              <div className="h-[70vh] w-[50vw]">
+              <div className="h-[30vh] w-[80vw] md:h-[70vh] md:w-[50vw]">
                 <motion.div
                   initial={{ y: 80 }}
                   animate={{ y: 0 }}
@@ -277,13 +277,15 @@ export const Footer = () => {
                       width={480}
                       height={480}
                       alt=""
-                      className="h-auto w-[2.5vw] cursor-pointer hover:animate-shake"
+                      className="h-auto w-[6vw] cursor-pointer hover:animate-shake md:w-[2.5vw]"
                       onClick={() => setIsModalDemoOpen(false)}
                     />
                   </div>
 
                   <div className="h-full w-full p-[1vw]">
-                    <div className="flex h-full w-full flex-col items-center justify-center bg-black"></div>
+                    <div className="flex h-full w-full flex-col items-center justify-center bg-black">
+                      {/* VIDEO */}
+                    </div>
                   </div>
                 </motion.div>
               </div>

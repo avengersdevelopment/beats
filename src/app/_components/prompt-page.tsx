@@ -22,6 +22,8 @@ export default function PromptPage({
   const { userId } = useUserStore();
 
   const [prompt, setPrompt] = useState<string>("");
+  const [duration, setDuration] = useState<number>(12);
+  const [genre, setGenre] = useState<string>("");
 
   const handleSubmit = async () => {
     if (!prompt) return;
@@ -61,23 +63,23 @@ export default function PromptPage({
 
   return (
     <section className="relative flex h-[80vh] w-full justify-center">
-      <div className="flex h-full w-[55vw] flex-col items-center justify-center">
+      <div className="flex h-full w-[80vw] md:w-[55vw] flex-col items-center justify-center">
         <p
-          className="text-[8vw] text-white drop-shadow-[0_5px_#C2A2FF]"
+          className="mb-4 text-6xl text-white drop-shadow-[0_5px_#C2A2FF] md:mb-0 md:text-[8vw]"
           style={{ WebkitTextStroke: "0.05vw", WebkitTextStrokeColor: "black" }}
         >
           BEATS
         </p>
 
         <p
-          className="mb-[2vw] w-full text-center text-[2vw] text-white drop-shadow-[0_5px_#402F5C]"
+          className="mb-8 md:mb-[2vw] w-full text-center text-xs md:text-[2vw] text-white drop-shadow-[0_5px_#402F5C]"
           style={{ WebkitTextStroke: "0.05vw", WebkitTextStrokeColor: "black" }}
         >
           PLEASE <span className="text-[#C2A2FF]">TYPE</span> THE TEXTFIELD
           BELOW TO GENERATE
         </p>
 
-        <div className="relative flex h-[8vh] w-full items-center gap-[2vw]">
+        <div className="relative mb-[2vw] flex md:h-[8vh] w-full items-center gap-[2vw]">
           <Image
             src={"/assets/home/icon-music.png"}
             width={480}
@@ -87,7 +89,7 @@ export default function PromptPage({
           />
 
           <input
-            className="h-full w-full border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 p-[1vw] text-[1vw] text-white placeholder:text-white focus:outline-none"
+            className="h-full w-full border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 p-[1vw] text-[8px] md:text-[1vw] text-white placeholder:text-white focus:outline-none"
             placeholder="TYPE YOUR MUSIC PREFERENCE..."
             onChange={(e) => {
               if (e.target.value) {
@@ -115,14 +117,22 @@ export default function PromptPage({
             />
           )}
         </div>
-        {/* <div className="mt-5 flex w-full flex-row gap-5">
-          <div className="w-[60%] border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 p-[1vw]">
-            <SliderDuration />
+
+        <div className="flex w-full items-center justify-center gap-[2.5vw]">
+          <div className="flex w-full gap-[1.5vw]">
+            <SliderDuration
+              duration={duration}
+              onChange={(duration) => setDuration(duration)}
+            />
+
+            <DropdownGenre
+              genre={genre}
+              onChange={(genre) => setGenre(genre)}
+            />
           </div>
-          <div className="">
-            <DropdownGenre />
-          </div>
-        </div> */}
+
+          <div className="w-[5vw]" />
+        </div>
       </div>
     </section>
   );

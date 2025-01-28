@@ -1,69 +1,56 @@
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useState } from "react";
 
-const dropdownList = ["lofi", "hiphop"];
-
-function DropdownGenre() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (event.target.closest(".dropdown") !== document.activeElement) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      // Cleanup function to remove event listener on unmount
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [isOpen]);
+const genres = ["Lo-fi", "Synthwave", "Jazz", "Hip-Hop", "Classical"];
+interface DropdownGenreProps {
+  genre: string;
+  onChange: (genre: string) => void;
+}
+export default function DropdownGenre({ genre, onChange }: DropdownGenreProps) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   return (
-    <div className="relative inline-block h-full w-full text-left">
-      <button
-        onClick={toggleDropdown}
-        className="inline-flex h-full w-full items-center justify-center border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 text-sm font-medium text-white focus:outline-none focus:ring-0"
+    <div className="flex h-full w-1/2 flex-col gap-[1vw]">
+      <div
+        className="flex w-full cursor-pointer items-center justify-between gap-[1vw] border bg-[#D9D9D9]/15 p-[0.5vw]"
+        onClick={() => setIsDropdownOpen((prev) => !prev)}
       >
-        Genre
-        <svg
-          className="-mr-1 ml-2 h-5 w-5"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      </button>
+        <p className="text-[8px] md:text-[1vw] text-white">{genre || "GENRE"}</p>
+        <Image
+          src={"/assets/home/icon-dropdown.png"}
+          width={480}
+          height={480}
+          alt=""
+          className="h-2 w-2 md:h-[1.5vh] md:w-[1.5vw]"
+        />
+      </div>
 
-      {isOpen && (
-        <div className="dropdown absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          {/* List item options */}
-          <div className="py-1">
-            {dropdownList.map((data, index) => (
-              <button
+      {isDropdownOpen && (
+        <div className="z-50 flex h-min max-h-[15vh] md:h-[20vh] flex-col items-center gap-[1vw] overflow-y-auto border bg-[#D9D9D9]/15">
+          {genres.map((item, index) => {
+            return (
+              <div
                 key={index}
-                onClick={() => console.log(data)}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                className="w-full cursor-pointer border-b border-dashed p-[0.5vw]"
+                onClick={() => {
+                  onChange(item);
+                  setIsDropdownOpen((prev) => !prev);
+                }}
               >
-                {data}
-              </button>
-            ))}
-          </div>
+                <p
+                  className="text-[8px] md:text-[1vw] text-white"
+                  style={{
+                    WebkitTextStroke: "0.05vw",
+                    WebkitTextStrokeColor: "black",
+                  }}
+                >
+                  {item}
+                </p>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
   );
 }
-
-export default DropdownGenre;
