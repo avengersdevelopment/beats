@@ -269,7 +269,7 @@ export const Footer = () => {
                   initial={{ y: 80 }}
                   animate={{ y: 0 }}
                   exit={{ y: 100 }}
-                  className="relative flex h-full w-full flex-col rounded-xl border-[0.25vw] border-white backdrop-blur-lg"
+                  className="relative flex h-full w-full flex-col items-center justify-center rounded-xl border-[0.25vw] border-white p-[1vw] backdrop-blur-lg"
                 >
                   <div className="absolute -right-[1.5vw] -top-[1.5vw] z-50">
                     <Image
@@ -282,11 +282,21 @@ export const Footer = () => {
                     />
                   </div>
 
-                  <div className="h-full w-full p-[1vw]">
+                  <div className="h-full w-full p-[1vw] mb-[1vw]">
                     <div className="flex h-full w-full flex-col items-center justify-center bg-black">
                       {/* VIDEO */}
                     </div>
                   </div>
+
+                  <Link href={""}>
+                    <Image
+                      src={"/assets/home/btn-demo.png"}
+                      width={480}
+                      height={480}
+                      className="h-auto w-[30vw] md:w-[14vw] hover:animate-shake mb-[1vw]"
+                      alt=""
+                    />
+                  </Link>
                 </motion.div>
               </div>
             </div>
