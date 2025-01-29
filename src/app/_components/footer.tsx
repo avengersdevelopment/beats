@@ -34,7 +34,10 @@ export const Footer = () => {
   }, [isPlaying, audioRef]);
 
   async function fetchMusics() {
-    const { data: library } = await supabase.from("library").select();
+    const { data: library } = await supabase
+      .from("library")
+      .select()
+      .eq("user_id", userId);
     if (library) {
       const mappedLibrary: MusicResponse[] = library.map((item) => ({
         item_id: item.item_id,
