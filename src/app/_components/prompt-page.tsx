@@ -49,8 +49,8 @@ export default function PromptPage({
 
       const responseData = await response.json();
 
-      if (!responseData.output || responseData.error) {
-      } else {
+      const status = await checkStatus({ statusUrl: responseData.urls.get });
+      if (status) {
         const data: MusicResponse = {
           user_id: userId || "",
           item_id: responseData.id,
@@ -69,26 +69,35 @@ export default function PromptPage({
     }
   };
 
-  async function checkStatus({ getUrl }: { getUrl: string }) {
-    const token = process.env.NEXT_PUBLIC_REPLICATE_KEY;
-    if (!token) {
-      throw new Error("Replicate API token not configured");
+  async function checkStatus({ statusUrl }: { statusUrl: string }) {
+    const maxAttempts = 30;
+    let attempts = 0;
+
+    while (attempts < maxAttempts) {
+      const response = await fetch("/api/check-status", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ statusUrl }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData = await response.json();
+
+      if (responseData.status === "succeeded") {
+        return true;
+      }
+
+      // Wait 500 milliseconds before next attempt
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      attempts++;
     }
 
-    const response = await fetch(getUrl, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const responseData = await response.json();
-    return responseData.status === "succeeded";
+    throw new Error("Timeout waiting for generation to complete");
   }
 
   return (

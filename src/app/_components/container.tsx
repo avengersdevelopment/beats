@@ -14,9 +14,13 @@ export default function Container() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!userId) {
+    const storedUserId = localStorage.getItem('userId');
+    if (!userId && !storedUserId) {
       const uuid = uuidv4();
       setUserId(uuid);
+      localStorage.setItem('userId', uuid);
+    } else if (!userId && storedUserId) {
+      setUserId(storedUserId);
     }
   }, [setUserId, userId]);
 
