@@ -31,12 +31,16 @@ export default function PromptPage({
     try {
       onSubmit();
 
-      const response = await fetch("/api/generate", {
+      const response = await fetch("/api/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({
+          prompt: prompt,
+          duration: duration,
+          genre: genre,
+        }),
       });
 
       if (!response.ok) {
@@ -44,22 +48,48 @@ export default function PromptPage({
       }
 
       const responseData = await response.json();
-      const data: MusicResponse = {
-        user_id: userId || "",
-        item_id: responseData.id,
-        created_at: responseData.created_at,
-        prompt: responseData.input.prompt,
-        duration: responseData.input.duration,
-        output: responseData.output,
-      };
 
-      await supabase.from("library").insert(data);
-      onSubmitted(data.output);
+      if (!responseData.output || responseData.error) {
+      } else {
+        const data: MusicResponse = {
+          user_id: userId || "",
+          item_id: responseData.id,
+          created_at: responseData.created_at,
+          prompt: responseData.originalPrompt,
+          duration: responseData.input.duration,
+          output: responseData.output,
+        };
+
+        await supabase.from("library").insert(data);
+        onSubmitted(data.output);
+      }
     } catch (error) {
       console.error("Error submitting prompt:", error);
       onSubmitted(null);
     }
   };
+
+  async function checkStatus({ getUrl }: { getUrl: string }) {
+    const token = process.env.NEXT_PUBLIC_REPLICATE_KEY;
+    if (!token) {
+      throw new Error("Replicate API token not configured");
+    }
+
+    const response = await fetch(getUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const responseData = await response.json();
+    return responseData.status === "succeeded";
+  }
 
   return (
     <section className="relative flex h-[80vh] w-full justify-center">
@@ -108,7 +138,7 @@ export default function PromptPage({
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[6vw] md:w-[3vw] animate-spin"
+              className="h-auto w-[6vw] animate-spin md:w-[3vw]"
             />
           ) : (
             <Image
@@ -116,7 +146,7 @@ export default function PromptPage({
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[8vw] md:w-[5vw] cursor-pointer"
+              className="h-auto w-[8vw] cursor-pointer md:w-[5vw]"
               onClick={handleSubmit}
             />
           )}
