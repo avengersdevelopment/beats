@@ -28,24 +28,28 @@ export interface MusicResponse {
   duration: number;
 }
 
-async function refinePromptWithOpenAI(prompt: string, genre?: string): Promise<string> {
+async function refinePromptWithOpenAI(
+  prompt: string,
+  genre?: string,
+): Promise<string> {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
 
-  const genreContext = genre ? ` in the ${genre} genre` : '';
-  
+  const genreContext = genre ? ` in the ${genre} genre` : "";
+
   const completion = await openai.chat.completions.create({
     model: "gpt-4-turbo-preview",
     messages: [
       {
         role: "system",
-        content: "You are an expert at crafting high-quality prompts for AI music generation. Transform the given prompt into a more detailed and effective version that will produce better results. Output only the prompt and nothing else"
+        content:
+          "You are an expert at crafting high-quality prompts for AI music generation. Transform the given prompt into a more detailed and effective version that will produce better results. Output only the prompt and nothing else",
       },
       {
         role: "user",
-        content: `Please enhance this music generation prompt${genreContext}. Make it more descriptive and specific while maintaining the original intent: "${prompt} "`
-      }
+        content: `Please enhance this music generation prompt${genreContext}. Make it more descriptive and specific while maintaining the original intent: "${prompt} "`,
+      },
     ],
     max_tokens: 200,
   });
@@ -62,7 +66,7 @@ export async function POST(request: NextRequest) {
     if (!replicateToken || !openaiToken) {
       return NextResponse.json(
         { error: "Required API tokens not set" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -73,17 +77,18 @@ export async function POST(request: NextRequest) {
     if (!prompt) {
       return NextResponse.json(
         { error: "Prompt cannot be empty" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // Refine the prompt using OpenAI
     const refinedPrompt = await refinePromptWithOpenAI(prompt, genre);
-    console.log(refinedPrompt)
+    console.log(refinedPrompt);
 
     // Prepare request for Replicate
     const replicateUrl = "https://api.replicate.com/v1/predictions";
-    const version = "671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb";
+    const version =
+      "671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb";
 
     const requestBody: GenerateRequestBody = {
       version: version,
@@ -103,23 +108,26 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
         Prefer: "wait",
       },
+      timeout: 180000,
     });
 
     // Return response with both the refined prompt and the Replicate response
-    return NextResponse.json({
-      originalPrompt: prompt,
-      refinedPrompt: refinedPrompt,
-      ...response.data
-    }, { status: response.status });
-
-  } catch (error: any) {
-    console.error('Error in music generation:', error);
     return NextResponse.json(
-      { 
-        error: error.response?.data || error.message,
-        status: error.response?.status || 500 
+      {
+        originalPrompt: prompt,
+        refinedPrompt: refinedPrompt,
+        ...response.data,
       },
-      { status: error.response?.status || 500 }
+      { status: response.status },
+    );
+  } catch (error: any) {
+    console.error("Error in music generation:", error);
+    return NextResponse.json(
+      {
+        error: error.response?.data || error.message,
+        status: error.response?.status || 500,
+      },
+      { status: error.response?.status || 500 },
     );
   }
 }
