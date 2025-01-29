@@ -40,11 +40,11 @@ async function refinePromptWithOpenAI(prompt: string, genre?: string): Promise<s
     messages: [
       {
         role: "system",
-        content: "You are an expert at crafting high-quality prompts for AI music generation. Transform the given prompt into a more detailed and effective version that will produce better results."
+        content: "You are an expert at crafting high-quality prompts for AI music generation. Transform the given prompt into a more detailed and effective version that will produce better results. Output only the prompt and nothing else"
       },
       {
         role: "user",
-        content: `Please enhance this music generation prompt${genreContext}. Make it more descriptive and specific while maintaining the original intent: "${prompt}"`
+        content: `Please enhance this music generation prompt${genreContext}. Make it more descriptive and specific while maintaining the original intent: "${prompt} "`
       }
     ],
     max_tokens: 200,
