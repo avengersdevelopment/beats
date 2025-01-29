@@ -108,7 +108,7 @@ export default function PromptPage({
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[3vw] animate-spin"
+              className="h-auto w-[6vw] md:w-[3vw] animate-spin"
             />
           ) : (
             <Image
@@ -116,7 +116,7 @@ export default function PromptPage({
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[5vw] cursor-pointer"
+              className="h-auto w-[8vw] md:w-[5vw] cursor-pointer"
               onClick={handleSubmit}
             />
           )}
