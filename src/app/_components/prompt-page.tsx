@@ -63,23 +63,27 @@ export default function PromptPage({
 
   return (
     <section className="relative flex h-[80vh] w-full justify-center">
-      <div className="flex h-full w-[80vw] md:w-[55vw] flex-col items-center justify-center">
+      <div className="flex h-full w-[80vw] flex-col items-center justify-center md:w-[55vw]">
         <p
-          className="mb-4 text-6xl text-white drop-shadow-[0_5px_#C2A2FF] md:mb-0 md:text-[8vw]"
+          className="mb-4 text-6xl text-white drop-shadow-[0_5px_#C2A2FF] md:mb-8 md:text-[8vw]"
           style={{ WebkitTextStroke: "0.05vw", WebkitTextStrokeColor: "black" }}
         >
           BEATS
         </p>
 
         <p
-          className="mb-8 md:mb-[2vw] w-full text-center text-xs md:text-[2vw] text-white drop-shadow-[0_5px_#402F5C]"
-          style={{ WebkitTextStroke: "0.05vw", WebkitTextStrokeColor: "black" }}
+          className="mb-8 w-full text-center text-xs text-white drop-shadow-[0_5px_#402F5C] md:mb-[2vw] md:text-[2vw]"
+          style={{
+            WebkitTextStroke: "0.05vw",
+            WebkitTextStrokeColor: "black",
+            lineHeight: 1,
+          }}
         >
           PLEASE <span className="text-[#C2A2FF]">TYPE</span> THE TEXTFIELD
           BELOW TO GENERATE
         </p>
 
-        <div className="relative mb-[2vw] flex md:h-[8vh] w-full items-center gap-[2vw]">
+        <div className="relative mb-[2vw] flex w-full items-center gap-[2vw] md:h-[8vh]">
           <Image
             src={"/assets/home/icon-music.png"}
             width={480}
@@ -89,7 +93,7 @@ export default function PromptPage({
           />
 
           <input
-            className="h-full w-full border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 p-[1vw] text-[8px] md:text-[1vw] text-white placeholder:text-white focus:outline-none"
+            className="h-full w-full border-[0.1vw] border-[#D7D7D7] bg-[#D9D9D9]/15 p-[1vw] text-[8px] text-white placeholder:text-white focus:outline-none md:text-[1vw]"
             placeholder="TYPE YOUR MUSIC PREFERENCE..."
             onChange={(e) => {
               if (e.target.value) {
@@ -104,7 +108,7 @@ export default function PromptPage({
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[3vw] animate-spin"
+              className="h-auto w-[6vw] md:w-[3vw] animate-spin"
             />
           ) : (
             <Image
@@ -112,7 +116,7 @@ export default function PromptPage({
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[5vw] cursor-pointer"
+              className="h-auto w-[8vw] md:w-[5vw] cursor-pointer"
               onClick={handleSubmit}
             />
           )}

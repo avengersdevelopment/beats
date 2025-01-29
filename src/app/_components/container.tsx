@@ -6,6 +6,7 @@ import PromptPage from "./prompt-page";
 import ResultPage from "./result-page";
 import { useUserStore } from "@/store/user-store";
 import { v4 as uuidv4 } from "uuid";
+import Image from "next/image";
 
 export default function Container() {
   const { result, userId, setResult, setUserId } = useUserStore();
@@ -39,6 +40,14 @@ export default function Container() {
           musicUrl={result}
         />
       )}
+
+      <Image
+        src={"/assets/home/deepseek-logo.png"}
+        width={480}
+        height={480}
+        alt=""
+        className="absolute bottom-[23vh] right-[30%] md:right-4 h-auto w-[40vw] md:w-[20vw]"
+      />
 
       <Footer />
     </main>

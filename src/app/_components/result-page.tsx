@@ -27,9 +27,9 @@ export default function ResultPage({ musicUrl, onBack }: ResultPageProps) {
 
   return (
     <section className="relative flex h-[80vh] w-full justify-center">
-      <div className="flex h-full w-[55vw] flex-col items-center justify-center">
+      <div className="flex h-full w-[80vw] flex-col items-center justify-center md:w-[55vw]">
         <p
-          className="text-[8vw] text-white drop-shadow-[0_5px_#C2A2FF]"
+          className="mb-4 text-6xl text-white drop-shadow-[0_5px_#C2A2FF] md:mb-8 md:text-[8vw]"
           style={{ WebkitTextStroke: "0.05vw", WebkitTextStrokeColor: "black" }}
         >
           RESULT!
@@ -42,7 +42,7 @@ export default function ResultPage({ musicUrl, onBack }: ResultPageProps) {
             width={480}
             height={480}
             alt=""
-            className="h-auto w-[12vw] cursor-pointer hover:animate-shake"
+            className="h-auto w-[20vw] md:w-[12vw] cursor-pointer hover:animate-shake"
             onClick={onBack}
           />
 
@@ -51,7 +51,7 @@ export default function ResultPage({ musicUrl, onBack }: ResultPageProps) {
             width={480}
             height={480}
             alt=""
-            className="h-auto w-[14vw] cursor-pointer hover:animate-shake"
+            className="h-auto w-[22vw] md:w-[14vw] cursor-pointer hover:animate-shake"
             onClick={() => handleDownload()}
           />
 
@@ -61,7 +61,7 @@ export default function ResultPage({ musicUrl, onBack }: ResultPageProps) {
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[12vw] cursor-pointer hover:animate-shake"
+              className="h-auto w-[18vw] md:w-[12vw] cursor-pointer hover:animate-shake"
             />
           </TwitterShareButton>
         </div>

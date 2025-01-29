@@ -65,13 +65,13 @@ export function AudioPlayer({ musicSrc }: AudioPlayerProps) {
   }, [musicSrc]);
 
   return (
-    <div className="relative flex h-[8vh] w-full items-center gap-[2vw] rounded-3xl border-[0.25vw] bg-[#36088D] px-[2.5vw] mb-[2vw]">
+    <div className="relative flex h-[8vh] w-full items-center gap-4 md:gap-[2vw] rounded-lg border-[0.25vw] bg-[#36088D] px-[2.5vw] mb-[2vw]">
       <Image
         src={"/assets/home/icon-music.png"}
         width={480}
         height={480}
         alt=""
-        className="absolute -left-[2.5vw] -top-[2.5vw] h-auto w-[5vw]"
+        className="absolute -left-[3.5vw] md:-left-[2.5vw] -top-[3vw] md:-top-[2.5vw] h-auto w-[8vw] md:w-[5vw]"
       />
 
       {isPlaying ? (
@@ -80,7 +80,7 @@ export function AudioPlayer({ musicSrc }: AudioPlayerProps) {
           width={480}
           height={480}
           alt=""
-          className="h-auto w-[1.75vw] cursor-pointer"
+          className="h-auto w-[3vw] md:w-[1.75vw] cursor-pointer"
           onClick={() => setIsPlaying(false)}
         />
       ) : (
@@ -89,7 +89,7 @@ export function AudioPlayer({ musicSrc }: AudioPlayerProps) {
           width={480}
           height={480}
           alt=""
-          className="h-auto w-[1.75vw] cursor-pointer"
+          className="h-auto w-[3vw] md:w-[1.75vw] cursor-pointer"
           onClick={() => setIsPlaying(true)}
         />
       )}
@@ -107,13 +107,13 @@ export function AudioPlayer({ musicSrc }: AudioPlayerProps) {
             audioRef.current.currentTime = newTime;
           }
         }}
-        className="h-[0.25vw] w-full appearance-none rounded-full bg-white/30 [&::-moz-range-thumb]:h-[1.5vw] [&::-moz-range-thumb]:w-[1.5vw] [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-webkit-slider-thumb]:h-[1.5vw] [&::-webkit-slider-thumb]:w-[1.5vw] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+        className="h-[0.75vw] md:h-[0.25vw] w-full appearance-none rounded-full bg-white/30 [&::-moz-range-thumb]:h-[1.5vw] [&::-moz-range-thumb]:w-[1.5vw] [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-webkit-slider-thumb]:h-[1.5vw] [&::-webkit-slider-thumb]:w-[1.5vw] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
         style={{
           background: `linear-gradient(to right, #FFFFFF ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%)`,
         }}
       />
 
-      <p className="text-[0.75vw] text-white">{formatTime(currentTime)}/{formatTime(duration)}</p>
+      <p className="text-[8px] md:text-[0.75vw] text-white">{formatTime(currentTime)}/{formatTime(duration)}</p>
 
       <audio 
         ref={audioRef} 
