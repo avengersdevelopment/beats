@@ -127,7 +127,17 @@ export const Footer = () => {
             onClick={() => setIsModalDemoOpen(true)}
           />
 
-          <div className="hidden h-auto md:block md:w-[20vw]" />
+          <div className="flex h-auto w-[20vw] flex-col items-center justify-end md:mt-[1vw]">
+            <p className="text-[8px] text-white md:text-[1vw]">POWERED BY</p>
+            <Image
+              src={"/assets/home/deepseek-logo.png"}
+              width={480}
+              height={480}
+              alt=""
+              className="h-auto w-[20vw] md:w-[12vw]"
+              priority
+            />
+          </div>
 
           <Image
             src={"/assets/home/btn-library.png"}
@@ -285,7 +295,7 @@ export const Footer = () => {
                     />
                   </div>
 
-                  <div className="h-full w-full p-[1vw] mb-[1vw]">
+                  <div className="mb-[1vw] h-full w-full p-[1vw]">
                     <div className="flex h-full w-full flex-col items-center justify-center bg-black">
                       {/* VIDEO */}
                     </div>
@@ -296,7 +306,7 @@ export const Footer = () => {
                       src={"/assets/home/btn-demo.png"}
                       width={480}
                       height={480}
-                      className="h-auto w-[30vw] md:w-[14vw] hover:animate-shake mb-[1vw]"
+                      className="mb-[1vw] h-auto w-[30vw] hover:animate-shake md:w-[14vw]"
                       alt=""
                     />
                   </Link>

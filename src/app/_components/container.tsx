@@ -45,14 +45,6 @@ export default function Container() {
         />
       )}
 
-      <Image
-        src={"/assets/home/deepseek-logo.png"}
-        width={480}
-        height={480}
-        alt=""
-        className="absolute bottom-[23vh] right-[30%] md:right-4 h-auto w-[40vw] md:w-[20vw]"
-      />
-
       <Footer />
     </main>
   );
