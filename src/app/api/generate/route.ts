@@ -63,6 +63,7 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
         Prefer: "wait",
       },
+      timeout: 180000,
     });
 
     const responseData = response.data;

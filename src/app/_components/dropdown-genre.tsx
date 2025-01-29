@@ -1,3 +1,4 @@
+import { cn } from "@/utils/classname";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -15,7 +16,9 @@ export default function DropdownGenre({ genre, onChange }: DropdownGenreProps) {
         className="flex w-full cursor-pointer items-center justify-between gap-[1vw] border bg-[#D9D9D9]/15 p-[0.5vw]"
         onClick={() => setIsDropdownOpen((prev) => !prev)}
       >
-        <p className="text-[8px] md:text-[1vw] text-white">{genre || "GENRE"}</p>
+        <p className="text-[8px] text-white md:text-[1vw]">
+          {genre || "GENRE"}
+        </p>
         <Image
           src={"/assets/home/icon-dropdown.png"}
           width={480}
@@ -25,32 +28,35 @@ export default function DropdownGenre({ genre, onChange }: DropdownGenreProps) {
         />
       </div>
 
-      {isDropdownOpen && (
-        <div className="z-50 flex h-min max-h-[15vh] md:h-[20vh] flex-col items-center gap-[1vw] overflow-y-auto border bg-[#D9D9D9]/15">
-          {genres.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className="w-full cursor-pointer border-b border-dashed p-[0.5vw]"
-                onClick={() => {
-                  onChange(item);
-                  setIsDropdownOpen((prev) => !prev);
+      <div
+        className={cn(
+          "z-50 flex h-min max-h-[15vh] flex-col items-center gap-[1vw] overflow-y-auto border bg-[#D9D9D9]/15 md:h-[20vh]",
+          isDropdownOpen ? "block" : "invisible",
+        )}
+      >
+        {genres.map((item, index) => {
+          return (
+            <div
+              key={index}
+              className="w-full cursor-pointer border-b border-dashed p-[0.5vw]"
+              onClick={() => {
+                onChange(item);
+                setIsDropdownOpen((prev) => !prev);
+              }}
+            >
+              <p
+                className="text-[8px] text-white md:text-[1vw]"
+                style={{
+                  WebkitTextStroke: "0.05vw",
+                  WebkitTextStrokeColor: "black",
                 }}
               >
-                <p
-                  className="text-[8px] md:text-[1vw] text-white"
-                  style={{
-                    WebkitTextStroke: "0.05vw",
-                    WebkitTextStrokeColor: "black",
-                  }}
-                >
-                  {item}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                {item}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
