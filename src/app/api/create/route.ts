@@ -3,7 +3,6 @@ import axios from "axios";
 import OpenAI from "openai";
 
 interface GenerateRequestBody {
-  version: string;
   input: {
     prompt: string;
     model_version: string;
@@ -86,12 +85,12 @@ export async function POST(request: NextRequest) {
     console.log(refinedPrompt);
 
     // Prepare request for Replicate
-    const replicateUrl = "https://api.replicate.com/v1/predictions";
+    const replicateUrl = "https://api.replicate.com/v1/deployments/avengersdevelopment/beats/predictions";
     const version =
       "671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb";
 
     const requestBody: GenerateRequestBody = {
-      version: version,
+
       input: {
         prompt: refinedPrompt,
         model_version: "stereo-large",
