@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { AudioPlayer } from "./audio-player";
 import { TwitterShareButton } from "react-share";
@@ -42,7 +44,7 @@ export default function ResultPage({ musicUrl, onBack }: ResultPageProps) {
             width={480}
             height={480}
             alt=""
-            className="h-auto w-[20vw] md:w-[12vw] cursor-pointer hover:animate-shake"
+            className="h-auto w-[20vw] cursor-pointer hover:animate-shake md:w-[12vw]"
             onClick={onBack}
           />
 
@@ -51,17 +53,20 @@ export default function ResultPage({ musicUrl, onBack }: ResultPageProps) {
             width={480}
             height={480}
             alt=""
-            className="h-auto w-[22vw] md:w-[14vw] cursor-pointer hover:animate-shake"
+            className="h-auto w-[22vw] cursor-pointer hover:animate-shake md:w-[14vw]"
             onClick={() => handleDownload()}
           />
 
-          <TwitterShareButton url={"x.com"} title={"example title"}>
+          <TwitterShareButton
+            url={window.location.origin || ""}
+            title={"I just generate the song from $BEATS, try it out now on "}
+          >
             <Image
               src={"/assets/home/btn-share.png"}
               width={480}
               height={480}
               alt=""
-              className="h-auto w-[18vw] md:w-[12vw] cursor-pointer hover:animate-shake"
+              className="h-auto w-[18vw] cursor-pointer hover:animate-shake md:w-[12vw]"
             />
           </TwitterShareButton>
         </div>

@@ -2,21 +2,21 @@ import Aos from "@/components/aos";
 import Providers from "@/components/providers";
 import { createClient } from "@/utils/supabase/server";
 import type { Metadata } from "next";
-import localFont from "next/font/local"
+import localFont from "next/font/local";
 import { twMerge } from "tailwind-merge";
 import "./globals.css";
 
 const joystix = localFont({
   src: "../../public/fonts/joystix.otf",
-  variable: "--font-joystix"
-})
+  variable: "--font-joystix",
+});
 
 export const metadata: Metadata = {
   title: "Beats",
-  description: "App Description",
+  description: "Generating personalized beats widely.",
   openGraph: {
     title: "Beats",
-    description: "App Description",
+    description: "Generating personalized beats widely.",
     url: "/",
     images: [
       {
@@ -39,7 +39,12 @@ export default async function RootLayout({
     <>
       <Aos />
       <html lang="en" className="relative">
-        <body className={twMerge(joystix.variable, "font-joystix antialiased bg-[#36088D]")}>
+        <body
+          className={twMerge(
+            joystix.variable,
+            "bg-[#36088D] font-joystix antialiased",
+          )}
+        >
           <Providers config={configs?.[0] || null}>{children}</Providers>
         </body>
       </html>
