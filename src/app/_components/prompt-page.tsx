@@ -53,11 +53,11 @@ export default function PromptPage({
       if (status) {
         const data: MusicResponse = {
           user_id: userId || "",
-          item_id: responseData.id,
-          created_at: responseData.created_at,
+          item_id: status.id,
+          created_at: status.created_at,
           prompt: responseData.originalPrompt,
-          duration: responseData.input.duration,
-          output: responseData.output,
+          duration: status.input.duration,
+          output: status.output,
         };
 
         await supabase.from("library").insert(data);
@@ -70,10 +70,7 @@ export default function PromptPage({
   };
 
   async function checkStatus({ statusUrl }: { statusUrl: string }) {
-    const maxAttempts = 30;
-    let attempts = 0;
-
-    while (attempts < maxAttempts) {
+    while (true) {
       const response = await fetch("/api/check-status", {
         method: "POST",
         headers: {
@@ -89,15 +86,12 @@ export default function PromptPage({
       const responseData = await response.json();
 
       if (responseData.status === "succeeded") {
-        return true;
+        return responseData;
       }
 
       // Wait 500 milliseconds before next attempt
       await new Promise((resolve) => setTimeout(resolve, 500));
-      attempts++;
     }
-
-    throw new Error("Timeout waiting for generation to complete");
   }
 
   return (
