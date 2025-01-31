@@ -165,6 +165,19 @@ export const Footer = () => {
             priority
             onClick={() => setIsModalOpen(true)}
           />
+
+          <Link
+            href={"https://github.com/BeatsmusicAI/BeatsAI"}
+            target="_blank"
+          >
+            <Image
+              src={"/assets/home/btn-github.png"}
+              width={480}
+              height={480}
+              className=" h-auto w-[50vw] hover:animate-shake md:w-[12vw]"
+              alt=""
+            />
+          </Link>
         </div>
       </div>
 
