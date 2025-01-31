@@ -355,10 +355,10 @@ export const Footer = () => {
                     target="_blank"
                   >
                     <Image
-                      src={"/assets/home/btn-demo.png"}
+                      src={"/assets/home/btn-demo-github.png"}
                       width={480}
                       height={480}
-                      className="mb-[1vw] h-auto w-[30vw] hover:animate-shake md:w-[14vw]"
+                      className="mb-[1vw] h-auto w-[50vw] hover:animate-shake md:w-[30vw]"
                       alt=""
                     />
                   </Link>
