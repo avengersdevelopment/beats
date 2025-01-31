@@ -139,7 +139,7 @@ export const Footer = () => {
             width={480}
             height={480}
             alt=""
-            className="absolute -top-[10%] h-auto w-[40vw] cursor-pointer hover:animate-shake md:-top-[25%] md:left-[40%] md:w-[24vw]"
+            className="absolute -top-[15%] h-auto w-[40vw] cursor-pointer hover:animate-shake md:-top-[25%] md:left-[40%] md:w-[24vw]"
             priority
             onClick={() => setIsModalDemoOpen(true)}
           />
@@ -174,7 +174,7 @@ export const Footer = () => {
               src={"/assets/home/btn-github.png"}
               width={480}
               height={480}
-              className=" h-auto w-[50vw] hover:animate-shake md:w-[12vw]"
+              className=" h-auto w-[50vw] hover:animate-shake md:w-[9vw]"
               alt=""
             />
           </Link>
