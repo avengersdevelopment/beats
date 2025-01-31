@@ -47,7 +47,7 @@ async function refinePromptWithOpenAI(
       },
       {
         role: "user",
-        content: `Please enhance this music generation prompt${genreContext}. Make it more descriptive and specific while maintaining the original intent: "${prompt} "`,
+        content: `Please enhance this music generation prompt${genreContext}.Make it maximum 20 words and make it more descriptive and specific while maintaining the original intent: "${prompt} "`,
       },
     ],
     max_tokens: 200,
