@@ -12,6 +12,7 @@ import { useUserStore } from "@/store/user-store";
 export const Footer = () => {
   const supabase = createClient();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { userId } = useUserStore();
 
   const xCoinUrl = useConfig()((state) => state.config.x_coin_url);
@@ -22,6 +23,8 @@ export const Footer = () => {
   const [listMusic, setLisMusic] = useState<MusicResponse[]>([]);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [musicUrl, setMusicUrl] = useState<string>("");
+  const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(true);
+  const [isHovering, setIsHovering] = useState<boolean>(false);
 
   useEffect(() => {
     if (audioRef) {
@@ -76,6 +79,19 @@ export const Footer = () => {
       console.error("Error downloading file:", error);
     }
   }
+
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsVideoPlaying(true);
+    }
+  };
+  const handlePause = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setIsVideoPlaying(false);
+    }
+  };
 
   useEffect(() => {
     if (isModalOpen && userId) {
@@ -295,13 +311,47 @@ export const Footer = () => {
                     />
                   </div>
 
-                  <div className="mb-[1vw] h-full w-full p-[1vw]">
-                    <div className="flex h-full w-full flex-col items-center justify-center bg-black">
-                      {/* VIDEO */}
+                  <div
+                    className="relative mb-[1vw] h-full w-full p-[1vw]"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    <div
+                      className={`absolute z-50 flex h-full w-full items-center justify-center transition-opacity duration-300 ${isHovering ? "opacity-100" : "opacity-0"}`}
+                    >
+                      {isVideoPlaying ? (
+                        <Image
+                          src={"/assets/home/btn-pause-video.png"}
+                          width={1000}
+                          height={1000}
+                          alt=""
+                          className="h-auto w-[5vw] cursor-pointer"
+                          onClick={handlePause}
+                        />
+                      ) : (
+                        <Image
+                          src={"/assets/home/btn-play-video.png"}
+                          width={1000}
+                          height={1000}
+                          alt=""
+                          className="h-auto w-[5vw] cursor-pointer"
+                          onClick={handlePlay}
+                        />
+                      )}
                     </div>
+
+                    <video
+                      ref={videoRef}
+                      src="/assets/home/video.mp4"
+                      autoPlay
+                      className="h-full w-full object-cover object-center"
+                    />
                   </div>
 
-                  <Link href={""}>
+                  <Link
+                    href={"https://github.com/BeatsmusicAI/BeatsAI"}
+                    target="_blank"
+                  >
                     <Image
                       src={"/assets/home/btn-demo.png"}
                       width={480}
