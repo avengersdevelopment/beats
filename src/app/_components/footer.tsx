@@ -25,6 +25,7 @@ export const Footer = () => {
   const [musicUrl, setMusicUrl] = useState<string>("");
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(true);
   const [isHovering, setIsHovering] = useState<boolean>(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     if (audioRef) {
@@ -312,7 +313,7 @@ export const Footer = () => {
                   </div>
 
                   <div
-                    className="relative mb-[1vw] h-full w-full p-[1vw]"
+                    className="relative mb-[1vw] h-full w-full bg-black p-[1vw]"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
                   >
@@ -345,6 +346,7 @@ export const Footer = () => {
                       src="/assets/home/video.mp4"
                       autoPlay
                       className="h-full w-full object-cover object-center"
+                      onLoadedData={() => setIsVideoLoaded(true)}
                     />
                   </div>
 
